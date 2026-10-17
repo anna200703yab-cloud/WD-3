@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Лабораторная работа: Селекторы CSS</title>
+ <style>
+ /* Красный — main title */
+ .main-title {
+ color: red;
+ }
+
+ /* Зеленый — nav links */
+ .nav-list .link {
+ color: green;
+ }
+
+ /* Синий — special link (overrides green) */
+ .nav-list .link.special-link {
+ color: blue;
+ }
+
+ /* Желтый — third nav link */
+ .nav-list li:last-child .link {
+ color: #e6c200;
+ }
+
+ /* Оранжевый — text in first post */
+ #first-post p {
+ color: orange;
+ }
+
+ /* Фиолетовый — text in second post */
+ .post:not(#first-post) p {
+ color: purple;
+ }
+
+ /* Розовый — widget heading */
+ .sidebar .widget h3 {
+ color: pink;
+ }
+
+ /* Серый — first list item */
+ .color-list li:first-child {
+ color: gray;
+ }
+
+ /* Коричневый — second list item */
+ .color-list li:nth-child(2) {
+ color: brown;
+ }
+
+ /* Черный — highlighted list item */
+ .color-list .highlighted {
+ color: black;
+ }
+
+ /* Бордовый — note text */
+ .important-widget .note {
+ color: maroon;
+ }
+
+ /* Белый — input placeholder */
+ #name::placeholder {
+ color: white;
+ }
+
+ /* Черный — submit button text */
+ .submit-btn {
+ color: black;
+ }
+
+ /* Фон для видимости белого текста */
+ footer {
+ background: #333;
+ padding: 20px;
+ }
+ </style>
+</head>
+<body>
+ <header>
+ <h1 class="main-title">Красный</h1>
+ <nav>
+ <ul class="nav-list">
+ <li><a href="#" class="link">Зеленый</a></li>
+ <li><a href="#" class="link special-link">Синий</a></li>
+ <li><a href="#" class="link">Желтый</a></li>
+ </ul>
+ </nav>
+ </header>
+
+ <section class="content">
+ <article class="post" id="first-post">
+ <h2>Пост 1: Оранжевый</h2>
+ <p>Этот блок текста должен стать оранжевым.</p>
+ </article>
+
+ <article class="post">
+ <h2>Пост 2: Фиолетовый</h2>
+ <p>Этот блок текста должен стать фиолетовым.</p>
+ </article>
+ </section>
+ <section class="sidebar">
+ <div class="widget">
+ <h3>Розовый</h3>
+ <ul class="color-list">
+ <li>Цвет: Серый</li>
+ <li>Цвет: Коричневый</li>
+ <li class="highlighted">Цвет: Черный</li>
+ </ul>
+ </div>
+ <div class="widget important-widget">
+ <h3>Бордовый</h3>
+ <p class="note">Этот текст должен стать бордовым.</p>
+ </div>
+ </section>
+ <footer>
+ <form action="#" class="form">
+ <label for="name">Введите имя:</label>
+ <input type="text" id="name" placeholder="Белый">
+ <button type="submit" class="submit-btn">Черный</button>
+ </form>
+ </footer>
+</body>
+</html>
