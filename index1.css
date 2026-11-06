@@ -224,7 +224,7 @@
       animation-delay: 2.5s;
     }
 
-   
+
 
     .star-eight {
       bottom: 10%;
@@ -237,7 +237,7 @@
       0%, 100% { opacity: 0.85; }
       50% { opacity: 0.3; }
     }
-    
+
 
     .dot {
       position: absolute;
@@ -347,7 +347,7 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      color: var(--gold);
+      color: #6A4FD6;
       font-size: 13px;
       font-weight: 700;
       letter-spacing: 2px;
@@ -359,11 +359,11 @@
       content: "";
       width: 28px;
       height: 1px;
-      background: var(--gold);
+      background: #6A4FD6;
     }
 
     .section-title {
-      color: var(--cream);
+      color: #1B1240;
       font-size: clamp(32px, 5vw, 48px);
       line-height: 1.15;
       margin-bottom: 24px;
@@ -371,7 +371,7 @@
     }
 
     .section-text {
-      color: rgba(234, 230, 255, 0.75);
+      color: rgba(27, 18, 64, 0.72);
       font-size: 16px;
       line-height: 1.9;
     }
@@ -379,7 +379,7 @@
     /* ===== ГЛАВНЫЙ ЭКРАН ===== */
 
     .hero {
-      scroll-margin-top: 78px; 
+      scroll-margin-top: 78px;
       position: relative;
       z-index: 1;
       min-height: calc(100vh - 78px);
@@ -457,7 +457,7 @@
         var(--cream) 45%,
         var(--gold) 100%
       );
-      
+
     }
 
     /* ===== ФОТОГРАФИЯ ===== */
@@ -631,7 +631,7 @@
       }
     }
 /* ===== СЕКЦИЯ 2: МОИ ДОСТИЖЕНИЯ ===== */
-/* Фон прозрачный: виден тот же космический фон, что и на главном экране */
+/* Светлый фон: контрастирует с тёмным космическим главным экраном */
 
 .achievements {
   position: relative;
@@ -642,8 +642,30 @@
   align-items: flex-start;          /* карточки начинаются выше */
   padding: 10px 0 80px;
   scroll-margin-top: 78px;          /* учитываем закреплённую навигацию при переходе по ссылке */
-  background: transparent;
-  color: var(--cream);
+  background:
+    radial-gradient(ellipse 50% 60% at 15% 0%, rgba(124, 107, 214, 0.18), transparent 70%),
+    radial-gradient(ellipse 45% 50% at 90% 100%, rgba(224, 64, 160, 0.10), transparent 70%),
+    linear-gradient(180deg, #F6F3FF 0%, #EBE5FF 100%);
+  color: #1B1240;
+}
+
+/* Декор второй секции: те же круги и звёзды, что на главном экране, но тёмные.
+   z-index: -1 внутри секции — под карточками и текстом, но над её фоном. */
+.achievements-decor {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.achievements-decor .circle {
+  border-color: rgba(91, 63, 208, 0.28);
+}
+
+.achievements-decor .star {
+  color: #5B3FD0;
+  text-shadow: 0 0 8px rgba(124, 107, 214, 0.45);
 }
 
 /* базовая ширина секции: от 1140 до 1440 px */
@@ -664,7 +686,7 @@
   content: "";
   width: 28px;
   height: 1px;
-  background: var(--gold);
+  background: #6A4FD6;
 }
 
 /* Карточки в ряд (Flexbox) */
@@ -683,19 +705,21 @@
   align-items: flex-start;
   gap: 18px;
   padding: 32px 26px;
-  background: rgba(124, 107, 214, 0.12);
-  border: 1px solid rgba(185, 168, 255, 0.35);
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(124, 107, 214, 0.55);
   border-radius: 22px;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 0 40px rgba(124, 107, 214, 0.15);
+  box-shadow: 0 10px 40px rgba(91, 63, 208, 0.30),
+              0 0 0 1px rgba(155, 140, 240, 0.15);
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .achievement-card:hover {
-  
-  border-color: var(--gold);
-  box-shadow: 0 0 55px rgba(124, 107, 214, 0.4);
+
+  border-color: #5B3FD0;
+  box-shadow: 0 16px 60px rgba(91, 63, 208, 0.55),
+              0 0 28px rgba(155, 140, 240, 0.6);
 }
 
 .achievement-icon {
@@ -705,8 +729,8 @@
   align-items: center;
   justify-content: center;
   border-radius: 18px;
-  color: var(--green-dark);
-  background: linear-gradient(135deg, #D6CCFF 0%, var(--gold) 45%, var(--green-light) 100%);
+  color: #ffffff;
+  background: linear-gradient(135deg, #9B8CF0 0%, #7C6BD6 50%, #5B3FD0 100%);
 }
 
 .achievement-icon svg {
@@ -727,13 +751,13 @@
   min-height: 2.5em;                /* место под две строки, чтобы абзацы начинались на одном уровне */
   overflow-wrap: anywhere;
   hyphens: auto;
-  color: var(--cream);
+  color: #1B1240;
 }
 
 .achievement-card p {
   font-size: 15px;
   line-height: 1.75;
-  color: rgba(234, 230, 255, 0.75);
+  color: rgba(27, 18, 64, 0.72);
 }
 
 /* ===== АДАПТИВНОСТЬ ===== */
@@ -832,4 +856,3 @@
 @media (prefers-reduced-motion: reduce) {
   .cursor-star { display: none; }
 }
-

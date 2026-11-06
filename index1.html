@@ -53,7 +53,7 @@
     <span class="dot dot-three"></span>
   </div>
   <div class="shooting-layer" id="shootingLayer" aria-hidden="true"></div>
- 
+
   <!-- Закрепленная навигация -->
   <header class="navbar">
     <nav class="nav-container" aria-label="Главная навигация">
@@ -122,6 +122,27 @@
 
     <!-- Секция 2: Мои достижения -->
     <section class="achievements" id="achievements">
+
+      <!-- Тёмные круги и звёзды (копия декора главного экрана) -->
+      <div class="achievements-decor" aria-hidden="true">
+        <div class="circle circle-one"></div>
+        <div class="circle circle-two"></div>
+        <div class="circle circle-three"></div>
+        <div class="circle circle-four"></div>
+        <div class="circle circle-five"></div>
+        <div class="circle circle-six"></div>
+        <div class="circle circle-seven"></div>
+        <div class="circle circle-eight"></div>
+
+        <span class="star star-one">✦</span>
+        <span class="star star-two">✧</span>
+        <span class="star star-three">✦</span>
+        <span class="star star-four">✦</span>
+        <span class="star star-five">✧</span>
+        <span class="star star-six">✦</span>
+        <span class="star star-eight">✦</span>
+      </div>
+
       <div class="achievements-inner">
 
         <div class="achievements-header">
@@ -242,7 +263,7 @@
   if (!layer) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  const INTERVAL = 2000; // раз в 5 секунд
+  const INTERVAL = 2000; // раз в 2 секунды
   const rand = (min, max) => Math.random() * (max - min) + min;
 
   function shoot() {
@@ -293,7 +314,8 @@
   if (window.matchMedia("(hover: none)").matches) return;
 
   const symbols = ["✦", "✧", "✶", "·"];
-  const colors = ["#ffffff", "#B9A8FF", "#22D3EE", "#E040A0"];
+  // цвета подобраны так, чтобы звёздочки были видны и на тёмном, и на светлом фоне
+  const colors = ["#7C6BD6", "#5B3FD0", "#E040A0", "#22D3EE"];
   const rand = (min, max) => Math.random() * (max - min) + min;
 
   let lastX = 0, lastY = 0, lastTime = 0;
