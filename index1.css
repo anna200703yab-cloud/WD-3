@@ -724,7 +724,8 @@
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 21px;
   line-height: 1.25;
-  overflow-wrap: anywhere;          /* длинные слова не выходят за рамку карточки */
+  min-height: 2.5em;                /* место под две строки, чтобы абзацы начинались на одном уровне */
+  overflow-wrap: anywhere;
   hyphens: auto;
   color: var(--cream);
 }
@@ -766,16 +767,17 @@
 
   .achievement-card {
     flex: none;
+    min-height: 0;
     width: 100%;
   }
 }
 /* ===== ПАДАЮЩАЯ ЗВЕЗДА ===== */
 .shooting-layer {
-  position: absolute;   /* было fixed */
+  position: fixed;
   inset: 0;
   pointer-events: none;
   overflow: hidden;
-  /* z-index убран: слой живёт внутри .background, под контентом */
+  z-index: 0; /* под контентом (у секций z-index: 1), над фоном */
 }
 
 .shooting-star {
@@ -812,3 +814,22 @@
 @media (prefers-reduced-motion: reduce) {
   .shooting-layer { display: none; }
 }
+
+/* ===== ЗВЁЗДОЧКИ ЗА КУРСОРОМ ===== */
+.cursor-star {
+  position: fixed;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  z-index: 9999;              /* поверх всего, включая навигацию */
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(185, 168, 255, 0.9),
+               0 0 14px rgba(34, 211, 238, 0.6);
+  will-change: transform, opacity;
+  user-select: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-star { display: none; }
+}
+

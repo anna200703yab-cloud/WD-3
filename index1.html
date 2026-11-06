@@ -4,14 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#15370D">
-  <title>Анна – Web Developer</title>
+  <title>Анна – Web-developer</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="index1.css">
-  <link rel="stylesheet" href="achievements.css">
 </head>
 
 <body>
@@ -147,7 +146,7 @@
             <div class="achievement-body">
               <br>
               <h3>30+ готовых проектов</h3>
-              <p>Сайты-визитки, лендинги и интернет-магазины для малого бизнеса: от идеи и макета до запуска и поддержки.</p>
+              <p>Сайты-визитки, лендинги и интернет-магазины для малого бизнеса: от идеи и макета до запуска и поддержки</p>
             </div>
           </article>
 
@@ -162,7 +161,7 @@
             <div class="achievement-body">
               <br>
               <h3>Подтвержденный разработчик</h3>
-              <p>Окончила профессиональную программу по фронтенд-разработке и защитила дипломный проект с оценкой «отлично».</p>
+              <p>Окончила профессиональную программу по фронтенд-разработке и защитила дипломный проект с оценкой «отлично»</p>
             </div>
           </article>
 
@@ -177,8 +176,8 @@
             </div>
             <div class="achievement-body">
               <br>
-              <h3>Рост конверсии на 40%</h3>
-              <p>Переработала лендинг клиента: ускорила загрузку, упростила структуру и добавила понятные кнопки, и число заявок выросло почти вдвое.</p>
+              <h3>Постоянные клиенты</h3>
+              <p>Большинство заказчиков возвращаются за доработками и новыми проектами, а часть приходит по рекомендации</p>
             </div>
           </article>
 
@@ -195,8 +194,7 @@
             <div class="achievement-body">
              <br>
               <h3>Победа в хакатоне</h3>
-              <br>
-              <p>Заняла 1 место в командном хакатоне по веб-разработке: за 48 часов мы создали рабочий сервис и представили его жюри.</p>
+              <p>Заняла 1 место в командном хакатоне по веб-разработке: за 48 часов мы создали рабочий сервис и представили его жюри</p>
             </div>
           </article>
 
@@ -244,7 +242,7 @@
   if (!layer) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  const INTERVAL = 3000; // раз в 5 секунд
+  const INTERVAL = 2000; // раз в 5 секунд
   const rand = (min, max) => Math.random() * (max - min) + min;
 
   function shoot() {
@@ -288,6 +286,48 @@
 
   setTimeout(shoot, 1000);          // первая звезда через секунду после загрузки
   setInterval(shoot, INTERVAL);
+})();
+(function () {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  // на тач-экранах курсора нет
+  if (window.matchMedia("(hover: none)").matches) return;
+
+  const symbols = ["✦", "✧", "✶", "·"];
+  const colors = ["#ffffff", "#B9A8FF", "#22D3EE", "#E040A0"];
+  const rand = (min, max) => Math.random() * (max - min) + min;
+
+  let lastX = 0, lastY = 0, lastTime = 0;
+
+  document.addEventListener("mousemove", function (e) {
+    const now = performance.now();
+    // не чаще раза в 40 мс и только если курсор сдвинулся
+    if (now - lastTime < 40) return;
+    if (Math.hypot(e.clientX - lastX, e.clientY - lastY) < 8) return;
+    lastTime = now;
+    lastX = e.clientX;
+    lastY = e.clientY;
+
+    const star = document.createElement("span");
+    star.className = "cursor-star";
+    star.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    star.style.fontSize = rand(10, 20) + "px";
+    star.style.color = colors[Math.floor(Math.random() * colors.length)];
+    document.body.appendChild(star);
+
+    const dx = rand(-25, 25);
+    const dy = rand(15, 45);       // звёздочки слегка «падают» вниз
+    const rot = rand(-120, 120);
+
+    star.animate(
+      [
+        { transform: `translate(${e.clientX}px, ${e.clientY}px) rotate(0deg) scale(1)`, opacity: 1 },
+        { transform: `translate(${e.clientX + dx}px, ${e.clientY + dy}px) rotate(${rot}deg) scale(0.2)`, opacity: 0 }
+      ],
+      { duration: rand(600, 1000), easing: "ease-out" }
+    ).finished.then(function () {
+      star.remove();
+    });
+  });
 })();
   </script>
 
