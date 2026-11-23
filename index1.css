@@ -409,13 +409,15 @@
 
     .hero h1 {
       color: var(--cream);
-      font-size: clamp(45px, 6vw, 76px);
+      font-size: clamp(36px, 5vw, 60px);
       line-height: 1.1;
       letter-spacing: -1px;
       margin-bottom: 25px;
     }
 
     .hero h1 span {
+        overflow-wrap: normal;
+  hyphens: none;
       display: block;
       color: var(--gold);
     }
@@ -629,7 +631,7 @@
       }
 
       .hero h1 {
-        font-size: clamp(45px, 10vw, 68px);
+        font-size: clamp(32px, 8vw, 48px);
       }
 
       .hero-description {
@@ -659,7 +661,7 @@
       }
 
       .hero h1 {
-        font-size: 43px;
+        font-size: 34px;
       }
     }
 
@@ -719,7 +721,7 @@
 /* ширина и левый край как у главного экрана (.container) */
 .achievements-inner {
   width: min(1200px, 86%);
-  margin: 0 auto;
+  margin: 30px auto 40px;
   padding: 0;
 }
 
@@ -899,241 +901,14 @@
 @media (prefers-reduced-motion: reduce) {
   .cursor-star { display: none; }
 }
-/* ===== ОПИСАНИЕ ПОЯВЛЯЕТСЯ ПРИ НАВЕДЕНИИ ===== */
 
-/* фиксированная высота: карточки не прыгают и не двигают соседей */
-.achievement-card {
-  height: 380px;
-  justify-content: center;   /* иконка и название по центру, пока описание скрыто */
-  overflow: hidden;
-}
 
-/* описание скрыто */
-.achievement-card p {
-  max-height: 0;
-  opacity: 0;
-  transform: translateY(10px);
-  overflow: hidden;
-  transition: max-height 0.5s ease,
-              opacity 0.35s ease 0.1s,
-              transform 0.45s ease 0.1s;
-}
-
-/* при наведении (или фокусе с клавиатуры) описание раскрывается,
-   а иконка с названием плавно сдвигаются вверх */
-.achievement-card:hover p,
-.achievement-card:focus-within p {
-  max-height: 260px;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* иконка слегка оживает */
-.achievement-icon {
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.achievement-card:hover .achievement-icon,
-.achievement-card:focus-within .achievement-icon {
-  transform: scale(1.08);
-  box-shadow: 0 0 22px rgba(124, 107, 214, 0.65);
-}
-
-/* на телефонах и планшетах наведения нет, поэтому текст виден сразу */
-@media (hover: none), (max-width: 768px) {
-  .achievement-card {
-    height: auto;
-    justify-content: flex-start;
-  }
-
-  .achievement-card p {
-    max-height: none;
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .achievement-card p,
-  .achievement-icon {
-    transition: none;
-  }
-}
-/* ===== ПО ЦЕНТРУ И КРУПНЕЕ В СПОКОЙНОМ СОСТОЯНИИ ===== */
-
-.achievement-card {
-  height: 340px;               /* было 380px: пустоты меньше */
-  align-items: center;         /* иконка и название по центру по горизонтали */
-  justify-content: center;     /* и по вертикали */
-  text-align: center;
-  gap: 0;
-}
-
-/* иконка крупнее */
-.achievement-icon {
-  width: 96px;
-  height: 96px;
-  border-radius: 26px;
-  margin-bottom: 22px;
-}
-
-.achievement-icon svg {
-  width: 48px;
-  height: 48px;
-}
-
-.achievement-body {
-  align-items: center;
-  gap: 0;                      /* иначе скрытое описание оставляет пустой отступ */
-  width: 100%;
-}
-
-/* заголовок: одна и две строки центрируются в одном и том же месте */
-.achievement-card h3 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  min-height: 2.5em;
-}
-
-/* отступ у описания появляется только вместе с ним */
-.achievement-card p {
-  margin-top: 0;
-  transition: max-height 0.5s ease,
-              margin-top 0.5s ease,
-              opacity 0.35s ease 0.1s,
-              transform 0.45s ease 0.1s;
-}
-
-.achievement-card:hover p,
-.achievement-card:focus-within p {
-  margin-top: 12px;
-}
-
-/* на телефонах текст виден сразу */
-@media (hover: none), (max-width: 768px) {
-  .achievement-card {
-    height: auto;
-    padding: 32px 26px;
-  }
-
-  .achievement-card p {
-    margin-top: 12px;
-  }
-}
-/* иконка не сжимается, просто стала меньше */
-.achievement-icon {
-  flex-shrink: 0;
-  width: 72px;
-  height: 72px;
-  border-radius: 18px;
-  margin-bottom: 18px;
-}
-
-.achievement-icon svg {
-  width: 36px;
-  height: 36px;
-}
-
-/* чтобы описанию хватало места и ничего не сжималось */
-.achievement-card {
-  height: 400px;
-}
-
-.achievement-body {
-  flex-shrink: 0;
-}
-
-/* при наведении иконка не меняется ни по форме, ни по размеру */
-.achievement-card:hover .achievement-icon,
-.achievement-card:focus-within .achievement-icon {
-  transform: none;
-}
-
-/* ===== КАРТОЧКИ: МАЛЕНЬКИЕ В ПОКОЕ, РАСТУТ ПРИ НАВЕДЕНИИ ===== */
-
-/* список держит место под раскрытую карточку, чтобы ничего не прыгало,
-   а карточки растут вниз и не растягивают соседей */
-.achievements-list {
-  align-items: flex-start;
-  min-height: 400px;
-}
-
-.achievement-card {
-  height: 260px;                    /* компактный размер в покое */
-  transition: height 0.45s ease,
-              transform 0.25s ease,
-              box-shadow 0.25s ease,
-              border-color 0.25s ease;
-}
-
-.achievement-card:hover,
-.achievement-card:focus-within {
-  height: 400px;                    /* прежний размер */
-}
-
-/* ===== ТЕКСТ: ВЫРАВНИВАНИЕ ВЛЕВО + ЭФФЕКТ ПЕЧАТИ ===== */
-
-.achievement-card p {
-  position: relative;
-  text-align: left;
-  width: 100%;
-}
-
-/* невидимая копия полного текста резервирует высоту,
-   поэтому иконка и заголовок не дёргаются во время печати */
-.achievement-card p .ghost {
-  display: block;
-  color: transparent;
-  user-select: none;
-}
-
-/* сюда печатается текст */
-.achievement-card p .typed {
-  position: absolute;
-  inset: 0 auto auto 0;
-  width: 100%;
-  text-align: left;
-}
-
-/* мигающий курсор, пока идёт печать */
-.achievement-card p .typed.is-typing::after {
-  content: "";
-  display: inline-block;
-  width: 2px;
-  height: 1em;
-  margin-left: 2px;
-  vertical-align: text-bottom;
-  background: #5B3FD0;
-  animation: caret-blink 0.7s steps(1) infinite;
-}
 
 @keyframes caret-blink {
   50% { opacity: 0; }
 }
 
-/* на телефонах/планшетах текст виден сразу, без печати */
-@media (hover: none), (max-width: 768px) {
-  .achievement-card,
-  .achievement-card:hover,
-  .achievement-card:focus-within {
-    height: auto;
-  }
 
-  .achievements-list {
-    min-height: 0;
-  }
-
-  .achievement-card p .ghost {
-    color: inherit;
-    user-select: auto;
-  }
-
-  .achievement-card p .typed {
-    display: none;
-  }
-}
 /* ===== ЗАЛИВКА КАРТОЧКИ ПРИ НАВЕДЕНИИ ===== */
 
 .achievement-card {
@@ -1256,14 +1031,7 @@
   .tech-marquee { margin-top: 36px; }
   .tech-group span { font-size: 18px; }
 }
-/* список всегда занимает высоту маленькой карточки:
-   растущая карточка выходит за его границы и не двигает строку */
-@media (min-width: 1001px) {
-  .achievements-list {
-    height: 260px;
-    min-height: 0;
-  }
-}
+
 
 /* строка подтянута вверх и лежит под карточками */
 .tech-marquee {
@@ -1519,4 +1287,491 @@
     right: 10px;
     margin: 0;
     text-align: center;
+}
+/* ===== ДУГА ВНИЗ В КОНЦЕ ГЛАВНОГО ЭКРАНА ===== */
+
+/* вырезаем из верха светлой секции полуэллипс: сквозь него виден
+   тот же космический фон, так что тёмная часть выгибается вниз */
+.achievements {
+  -webkit-mask-image: radial-gradient(ellipse 50% 92px at 50% 0,
+                      transparent 99.7%, #000 100%);
+          mask-image: radial-gradient(ellipse 50% 92px at 50% 0,
+                      transparent 99.7%, #000 100%);
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+}
+
+/* светящийся ободок по краю дуги */
+.section-edge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 94px;
+  z-index: 2;
+  pointer-events: none;
+  box-sizing: border-box;
+  border-bottom: 2px solid #7C6BD6;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  filter: drop-shadow(0 4px 8px rgba(124, 107, 214, 0.9))
+          drop-shadow(0 8px 20px rgba(224, 64, 160, 0.4));
+}
+
+/* заголовок опускаем, чтобы дуга его не закрывала */
+.achievements-inner {
+  padding-top: 112px;
+}
+
+@media (max-width: 768px) {
+  .achievements {
+    -webkit-mask-image: radial-gradient(ellipse 50% 52px at 50% 0,
+                        transparent 99.5%, #000 100%);
+            mask-image: radial-gradient(ellipse 50% 52px at 50% 0,
+                        transparent 99.5%, #000 100%);
+  }
+  .section-edge {
+    height: 54px;
+  }
+  .achievements-inner {
+    padding-top: 72px;
+  }
+}
+/* переход к заголовку «Мои достижения», дуга уходит под шапку */
+.achievements-header {
+  scroll-margin-top: calc(var(--nav-h) + 24px);
+}
+
+/* запас высоты, чтобы страница могла прокрутиться до заголовка
+   даже на высоких экранах, где контента мало */
+.achievements {
+  min-height: calc(100vh + 40px);
+}
+
+@media (max-width: 768px) {
+  .achievements {
+    min-height: auto;
+  }
+}
+/* ===== КНОПКИ: ТЁМНО-ФИОЛЕТОВЫЙ КРУГ И СТРЕЛКИ, ФОН КАК У КАРТОЧКИ ===== */
+
+/* лицевая сторона: фон белый, как у карточки */
+.flip-round {
+  background: rgba(255, 255, 255, 0.85);
+  color: #2A1590;                       /* тёмно-фиолетовые стрелки */
+  border: 2px solid #2A1590;            /* тёмно-фиолетовый круг */
+  box-shadow: none;
+}
+
+/* обратная сторона: фон под цвет светлого градиента карточки */
+.flip-round--back {
+  background: #E8E0FF;
+  color: #2A1590;
+  border: 2px solid #2A1590;
+  box-shadow: none;
+}
+
+/* без пульсирующего кольца */
+.flip-round::before {
+  display: none;
+}
+
+/* при наведении: цвета остаются, стрелки просто делают пол-оборота */
+.flip-card:hover .flip-round,
+.flip-card:focus-visible .flip-round {
+  background: rgba(255, 255, 255, 0.85);
+  color: #2A1590;
+  border-color: #2A1590;
+  box-shadow: none;
+}
+
+.flip-card:hover .flip-round--back,
+.flip-card:focus-visible .flip-round--back {
+  background: #E8E0FF;
+  color: #2A1590;
+  border-color: #2A1590;
+  box-shadow: none;
+}
+
+/* ===== КАРТОЧКИ: ПО ЦЕНТРУ, ОДИНАКОВЫЙ РАЗМЕР, БЕЗ УВЕЛИЧЕНИЯ ПРИ ПЕРЕВОРОТЕ ===== */
+
+/* сетка из 4 равных колонок на всю ширину контейнера, по центру */
+.achievements-list {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: center;
+  justify-items: stretch;
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
+
+/* карточка: фиксированная высота, размер не зависит от содержимого */
+.flip-card {
+  flex: none !important;
+  width: 100%;
+  min-width: 0;
+  height: 270px;
+  /* большая перспектива = почти нет «приближения» при повороте */
+  perspective: 3000px;
+}
+
+.flip-inner {
+  width: 100%;
+  height: 100%;
+}
+
+/* обе стороны строго по размеру карточки */
+.flip-face {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* планшеты: 2 в ряд */
+@media (max-width: 1000px) {
+  .achievements-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* телефоны: одна колонка, по центру */
+@media (max-width: 768px) {
+  .achievements-list {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 420px;
+  }
+
+  .flip-card {
+    height: 250px;
+  }
+}
+
+/* ===== КОНТЕЙНЕР СЕКЦИИ: ТА ЖЕ ШИРИНА, ЧТО У ГЛАВНОГО ЭКРАНА ===== */
+
+.achievements-inner {
+  flex: 0 1 auto;                /* не растягиваем на 100% */
+  width: min(1200px, 86%);       /* как у .container в hero */
+  min-width: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.achievements-list,
+.tech-marquee {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .achievements-inner {
+    width: 88%;
+  }
+}
+
+/* круглая кнопка со стрелками */
+.flip-round {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: transform 0.5s ease;
+}
+
+.flip-round svg {
+  width: 20px;
+  height: 20px;
+}
+
+.flip-card:hover .flip-round,
+.flip-card:focus-visible .flip-round {
+  transform: rotate(180deg);   /* пол-оборота стрелок, как в вашем комментарии */
+}
+
+/* обёртки строк внутри карточки */
+.flip-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+/* ===== ОБРАТНАЯ СТОРОНА: ЗАГОЛОВОК, ТЕКСТ И КНОПКА НА ОДНОМ УРОВНЕ ===== */
+
+.flip-back {
+  justify-content: flex-start;      /* вместо центрирования всего блока */
+  gap: 0;
+  padding: 24px 18px 22px;
+}
+
+/* заголовок: место под две строки, текст внутри по центру */
+.flip-back .flip-row--title {
+  height: 46px;
+  flex: 0 0 46px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+/* описание: одинаковая высота под 4 строки, начинается на одном уровне */
+.flip-back .flip-row--text {
+  height: 92px;
+  flex: 0 0 92px;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* кнопка всегда прижата вниз, одинаково у всех карточек */
+.flip-back .flip-row--btn {
+  margin-top: auto;
+  justify-content: center;
+}
+
+.flip-back h3 {
+  margin: 0;
+  min-height: 0;
+}
+/* ===== СЕКЦИЯ 3: ТЕХНОЛОГИИ ===== */
+/* Тёмный космический фон: контрастирует со светлой секцией 2 */
+
+.skills {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: calc(100vh - var(--nav-h));
+  display: flex;
+  align-items: center;
+  padding: 90px 0;
+  scroll-margin-top: var(--nav-h);
+  overflow: hidden;
+  color: var(--cream);
+  border-top: 1px solid rgba(185, 168, 255, 0.35);
+  background:
+    radial-gradient(ellipse 60% 50% at 15% 10%, rgba(124, 58, 237, 0.35), transparent 70%),
+    radial-gradient(ellipse 50% 45% at 90% 40%, rgba(224, 64, 160, 0.20), transparent 70%),
+    radial-gradient(ellipse 60% 50% at 50% 110%, rgba(34, 211, 238, 0.18), transparent 70%),
+    linear-gradient(180deg, #0A0720 0%, #120B35 55%, #05030F 100%);
+}
+
+/* декор: те же круги и звёзды, что и на других экранах */
+.skills-decor {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* контейнер: та же ширина, что у секции 2 */
+.skills-inner {
+  width: min(1200px, 86%);
+  margin: 0 auto;
+}
+
+.skills-header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 48px;
+  scroll-margin-top: calc(var(--nav-h) + 24px);
+}
+
+/* на тёмном фоне текст светлый */
+.skills .section-title {
+  color: var(--cream);
+}
+
+.skills .section-text {
+  color: rgba(234, 230, 255, 0.78);
+}
+
+/* ===== СЕТКА КАРТОЧЕК (CSS Grid) ===== */
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));  /* 3 в ряд на больших экранах */
+  gap: 24px;
+}
+
+.skill-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 30px 26px 26px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(185, 168, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+  transition: transform 0.35s ease, border-color 0.35s ease,
+              box-shadow 0.35s ease, background 0.35s ease;
+}
+
+.skill-card:hover {
+  border-color: rgba(214, 204, 255, 0.85);
+  background: rgba(124, 107, 214, 0.14);
+  box-shadow: 0 0 0 1px rgba(214, 204, 255, 0.5),
+              0 18px 55px rgba(91, 63, 208, 0.5),
+              0 0 30px rgba(224, 64, 160, 0.3),
+              0 0 50px rgba(34, 211, 238, 0.2);
+}
+
+/* обёртка иконки */
+.skill-icon {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #9B8CF0 0%, #7C6BD6 50%, #5B3FD0 100%);
+  box-shadow: 0 0 22px rgba(137, 105, 240, 0.55);
+  transition: transform 0.5s ease;
+}
+
+.skill-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.skill-card:hover .skill-icon {
+  transform: scale(1.05);
+}
+
+/* обёртка текста */
+.skill-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.skill-body h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  line-height: 1.25;
+  color: var(--cream);
+}
+
+.skill-body p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: rgba(234, 230, 255, 0.75);
+}
+
+/* шкала уровня */
+.skill-level-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--gold);
+}
+
+.skill-bar {
+  height: 6px;
+  overflow: hidden;
+  border-radius: 6px;
+  background: rgba(185, 168, 255, 0.18);
+}
+
+.skill-fill {
+  width: var(--level);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #7C6BD6, var(--nebula-cyan), var(--nebula-pink));
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.6);
+  transform-origin: left;
+  animation: skill-grow 1.4s ease-out both;
+}
+
+@keyframes skill-grow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* появление карточек при прокрутке (класс ставит JS) */
+.skill-card.is-hidden {
+  opacity: 0;
+}
+
+.skill-card {
+  transition: border-color 0.35s ease, box-shadow 0.35s ease,
+              background 0.35s ease, opacity 0.7s ease;
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
+
+/* планшеты: 2 колонки */
+@media (max-width: 1000px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* телефоны: 1 колонка */
+@media (max-width: 768px) {
+  .skills {
+    min-height: auto;
+    padding: 60px 0 70px;
+  }
+
+  .skills-inner {
+    width: 88%;
+  }
+
+  .skills-header {
+    margin-bottom: 32px;
+  }
+
+  .skills-grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-fill { animation: none; }
+  .skill-card.is-hidden { opacity: 1; }
+}
+/* ===== ДУГА МЕЖДУ СЕКЦИЯМИ 2 И 3 ===== */
+
+/* секция 3 поднимается на высоту дуги, а из её верха вырезается
+   полуэллипс: через него видна светлая секция 2 */
+.skills {
+  margin-top: -92px;
+  padding-top: 182px;               /* 90px + 92px дуги */
+  border-top: none;                 /* линия сверху больше не нужна */
+  -webkit-mask-image: radial-gradient(ellipse 50% 92px at 50% 0,
+                      transparent 99.7%, #000 100%);
+          mask-image: radial-gradient(ellipse 50% 92px at 50% 0,
+                      transparent 99.7%, #000 100%);
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+}
+
+/* запас внизу секции 2, чтобы дуга не закрывала бегущую строку */
+.achievements {
+  padding-bottom: 110px;
+}
+
+@media (max-width: 768px) {
+  .skills {
+    margin-top: -52px;
+    padding-top: 112px;             /* 60px + 52px дуги */
+    -webkit-mask-image: radial-gradient(ellipse 50% 52px at 50% 0,
+                        transparent 99.5%, #000 100%);
+            mask-image: radial-gradient(ellipse 50% 52px at 50% 0,
+                        transparent 99.5%, #000 100%);
+  }
+
+  .achievements {
+    padding-bottom: 80px;
+  }
 }
